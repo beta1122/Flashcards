@@ -18,16 +18,18 @@ struct DeckListView: View {
                         presentationMode.wrappedValue.dismiss()
                     }
                     Spacer()
+                    Text(collection.name).frame(alignment: .leading).font(.title)
+                    Spacer()
                     NavigationLink(destination: NewDeckView(collection: $collection)){
-                        Text("New deck")
+                        Text("New  ")
                     }.navigationTitle(collection.name).navigationBarHidden(true)
                     
                 }.padding()
-                Text(collection.name).frame(alignment: .leading).font(.title)
-                ForEach(collection.decks){ deck in
-                    NavigationLink(destination: FlashcardView(deck: deck)){
+                
+                ForEach($collection.decks){ $deck in
+                    NavigationLink(destination: FlashcardView(deck: $deck)){
                         DeckView(deck: deck)
-                    }
+                    }.buttonStyle(PlainButtonStyle())
                 }
                 
                 

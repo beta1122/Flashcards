@@ -21,24 +21,23 @@ struct ContentView: View {
                             
                         }
                     }
-                    ForEach($collections){$collection in
+                    
+                    ForEach($collections, id: \.id){$collection in
+                        
                         NavigationLink(destination: DeckListView(collection: $collection)){
-                            CollectionView(collection: collection)
-                        }
+                            CollectionView(collection: collection).background(Color.blue)
+                        }.buttonStyle(PlainButtonStyle())
+                            
+                        
                     }
                     Spacer()
                     
                 }.navigationTitle("Collections").navigationBarHidden(true)
-                    .toolbar {
-                        Button("Add new collection") {
-                            
-                        }
-                    }
-                
-            }
+                    
+            }.padding()
         }
         
-        .padding()
+        
     }
 }
 

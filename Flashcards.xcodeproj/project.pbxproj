@@ -26,6 +26,8 @@
 		6FF397E12AE0DB770096B143 /* DeckListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF397E02AE0DB770096B143 /* DeckListView.swift */; };
 		6FF397E52AE2F1940096B143 /* FlashcardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF397E42AE2F1940096B143 /* FlashcardManager.swift */; };
 		6FF397EB2AE8DAE70096B143 /* FlashcardEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF397EA2AE8DAE70096B143 /* FlashcardEditView.swift */; };
+		6FF397ED2AE8E1F00096B143 /* ListCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF397EC2AE8E1F00096B143 /* ListCardView.swift */; };
+		6FF398002AEE06690096B143 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF397FF2AEE06690096B143 /* Theme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +70,8 @@
 		6FF397E02AE0DB770096B143 /* DeckListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckListView.swift; sourceTree = "<group>"; };
 		6FF397E42AE2F1940096B143 /* FlashcardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashcardManager.swift; sourceTree = "<group>"; };
 		6FF397EA2AE8DAE70096B143 /* FlashcardEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashcardEditView.swift; sourceTree = "<group>"; };
+		6FF397EC2AE8E1F00096B143 /* ListCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCardView.swift; sourceTree = "<group>"; };
+		6FF397FF2AEE06690096B143 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,7 @@
 				6FF397A42ADE54800096B143 /* FlashcardsApp.swift */,
 				6FF397A62ADE54800096B143 /* ContentView.swift */,
 				6FF397E02AE0DB770096B143 /* DeckListView.swift */,
+				6FF397EC2AE8E1F00096B143 /* ListCardView.swift */,
 				6FF397D02ADE55810096B143 /* FlashcardView.swift */,
 				6FF397EA2AE8DAE70096B143 /* FlashcardEditView.swift */,
 				6FF397E42AE2F1940096B143 /* FlashcardManager.swift */,
@@ -130,6 +135,7 @@
 				6FF397D62ADF60560096B143 /* CardEditView.swift */,
 				6FF397D82ADFAE920096B143 /* Collection.swift */,
 				6FF397DC2ADFB28B0096B143 /* CollectionView.swift */,
+				6FF397FF2AEE06690096B143 /* Theme.swift */,
 				6FF397DE2AE0DAEE0096B143 /* DeckView.swift */,
 				6FF397DA2ADFAF1C0096B143 /* DataStore.swift */,
 				6FF397A82ADE54810096B143 /* Assets.xcassets */,
@@ -302,7 +308,9 @@
 				6FF397D12ADE55810096B143 /* FlashcardView.swift in Sources */,
 				6FF397D32ADEFA2B0096B143 /* Deck.swift in Sources */,
 				6FF397A72ADE54800096B143 /* ContentView.swift in Sources */,
+				6FF398002AEE06690096B143 /* Theme.swift in Sources */,
 				6FF397DD2ADFB28B0096B143 /* CollectionView.swift in Sources */,
+				6FF397ED2AE8E1F00096B143 /* ListCardView.swift in Sources */,
 				6FF397A52ADE54800096B143 /* FlashcardsApp.swift in Sources */,
 				6FF397DB2ADFAF1C0096B143 /* DataStore.swift in Sources */,
 				6FF397D92ADFAE920096B143 /* Collection.swift in Sources */,

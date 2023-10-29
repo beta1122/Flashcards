@@ -10,12 +10,13 @@ import Foundation
 struct Collection: Identifiable, Codable{
     let id: UUID
     let name: String
-    let decks: [Deck]
-    
-    init(id: UUID = UUID(), name: String, decks: [Deck]) {
+    var decks: [Deck]
+    var theme: Theme
+    init(id: UUID = UUID(), name: String, decks: [Deck], theme: Theme = .green) {
         self.id = id
         self.name = name
         self.decks = decks
+        self.theme = theme
     }
     
 }

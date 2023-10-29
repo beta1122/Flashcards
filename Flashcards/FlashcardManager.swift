@@ -15,6 +15,7 @@ struct FlashcardManager{
         if(deck.shuffle){
             shufflecards()
         }
+        flipcards()
     }
     init(){
         
@@ -28,6 +29,19 @@ struct FlashcardManager{
             let tempCard1 = flashcards[randomIndex1]
             flashcards[randomIndex1] = flashcards[randomIndex2]
             flashcards[randomIndex2] = tempCard1
+        }
+        print("Shuffled deck")
+    }
+    mutating func flipcards(){
+        for i in 0..<flashcards.count{
+            if(flashcards[i].type == .definition){
+                let randomValue = arc4random_uniform(2)
+                if(randomValue == 1){
+                    let temp = flashcards[i].front
+                    flashcards[i].front = flashcards[i].back
+                    flashcards[i].back = temp
+                }
+            }
         }
     }
     mutating func add(flashcard: Flashcard){

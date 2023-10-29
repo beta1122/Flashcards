@@ -9,11 +9,12 @@ import Foundation
 struct Deck: Identifiable, Codable{
     let id: UUID
     let name: String
-    let flashcards: [Flashcard]
+    var flashcards: [Flashcard]
     let shuffle: Bool
-    
-    private var correct: Int = 0
-    private var incorrect: Int = 0
+    var fontSize: CGFloat = 20
+    var correct: Int = 0
+    var incorrect: Int = 0
+    var theme: Theme = .blue
     
     mutating func addCorrect(){
         correct = correct + 1
@@ -30,14 +31,15 @@ struct Deck: Identifiable, Codable{
         self.name = name
         self.flashcards = flashcards
         self.shuffle = shuffle
+        
     }
 }
 
 extension Deck{
     static let sampleDeck: Deck = Deck(name: "Sample Deck", flashcards: Flashcard.sampleArray)
-    static let sampleDeck2: Deck = Deck(name: "Chapter 3", flashcards: Flashcard.chapter3)
-    static let sampleDeck3: Deck = Deck(name: "Brain", flashcards: Flashcard.chapter3)
-    static let sampleDeck4: Deck = Deck(name: "Drugs", flashcards: Flashcard.chapter3)
+    static let sampleDeck2: Deck = Deck(name: "Chapter 3", flashcards: Flashcard.chapter3, shuffle: true)
+    static let sampleDeck3: Deck = Deck(name: "Chapter 6", flashcards: Flashcard.chapter6, shuffle: true)
+    static let sampleDeck4: Deck = Deck(name: "Chapter 7", flashcards: Flashcard.chapter7, shuffle: true)
     static let sampleDeck5: Deck = Deck(name: "Neurotransmitters", flashcards: Flashcard.chapter3)
     
 }

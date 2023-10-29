@@ -12,7 +12,7 @@ struct DeckView: View {
     var body: some View {
         ZStack(alignment: .top){
             RoundedRectangle(cornerRadius: 20)
-                .fill(Color(red: 0/255, green: 255/255, blue: 255/255))
+                .fill(deck.theme.mainColor)
                 .frame(height: 200)
             VStack{
                 HStack{
@@ -20,7 +20,7 @@ struct DeckView: View {
                         .font(.headline)
                         .frame(maxWidth: .infinity, alignment: .topLeading)
                         .padding()
-                    Text("\(deck.flashcards.count) Flashcards")
+                    Text("\(deck.flashcards.count) flashcards")
                         .font(.headline)
                         .frame(maxWidth: .infinity, alignment: .topTrailing)
                         .padding()

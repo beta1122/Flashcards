@@ -9,13 +9,14 @@ import SwiftUI
 
 //green button removes and red button puts at the back of deck
 struct FlashcardView: View {
-    @State var currentIndex: Int = 0
+    @State var currentIndex: Int = -1
     @State var isFlipped: Bool = false
     @State var isTouched: Bool = false
     @State var redButtonIsTouched: Bool = false
+    @State private var isPressed = false
     @State var manager: FlashcardManager = FlashcardManager()
     @Environment(\.presentationMode) private var presentationMode
-    var deck: Deck
+    @Binding var deck: Deck
     var body: some View {
         
         NavigationStack{
@@ -28,12 +29,13 @@ struct FlashcardView: View {
                     Text("Psych chapter 3").font(.title)
                         .frame(alignment:.center)
                     Spacer()
-                    NavigationLink(destination: Text("heh heh")){
+                    NavigationLink(destination: FlashcardEditView(manager: $manager, deck: $deck)){
                         Text("Edit")
                     }
                     
                 }.onAppear(){
                     manager.addDeck(deck: deck)
+                    print("Added deck")
                 }
                 
                 
@@ -42,22 +44,38 @@ struct FlashcardView: View {
                         RoundedRectangle(cornerRadius: 20)
                             .fill(Color(red: 184 / 255, green: 204 / 255, blue: 255 / 255))
                             .frame(width: geometry.size.width)
+                            
+                                       
+                        
                         if let flashcard = manager.front{
-                            if(!isFlipped){
-                                Text(flashcard.front)
+                            switch(flashcard.type){
+                            case .definition,.normal:
+                                if(!isFlipped){
+                                    Text(flashcard.front)
+                                        .font(.system(size: deck.fontSize))
+                                        .padding(10)
+                                        .frame(maxWidth: .infinity, maxHeight: 500, alignment: .top)
+                                    
+                                } else {
+                                    Text(flashcard.back)
+                                        .font(.system(size: deck.fontSize))
+                                        .padding(10)
+                                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                                        .multilineTextAlignment(.center)
+                                }
+                            case .list:
+                                ListCardView(currentIndex: currentIndex, flashcard: flashcard, fontSize: deck.fontSize)
+                            
+                            }
+                        } else {
+                            VStack{
+                                Text("Your done!!! YAY :D")
                                     .font(.largeTitle)
                                     .padding(10)
                                     .frame(maxWidth: .infinity, maxHeight: 500, alignment: .top)
-                                
-                            } else {
-                                Text(flashcard.back)
-                                    .font(.largeTitle)
-                                    .padding(10)
-                                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                                    .multilineTextAlignment(.center)
+                                Text("Don't press the buttons (the app will crash)")
                             }
-                        } else {
-                            Text("loading")
+                                
                         }
                         
                         
@@ -66,7 +84,19 @@ struct FlashcardView: View {
                 }
                 .frame(height: 500)
                 .onTapGesture {
-                    isFlipped.toggle()
+                    withAnimation(){
+                        isFlipped.toggle()
+                    }
+                    if let flashcard = manager.front{
+                        if(flashcard.type == .list){
+                            currentIndex += 1
+                                
+                            if(currentIndex == flashcard.listItems.count){
+                                currentIndex = -1
+                                print("Reset index")
+                            }
+                        }
+                    }
                 }
                 .navigationBarHidden(true)
                 
@@ -82,6 +112,7 @@ struct FlashcardView: View {
                                         manager.remove()
                                         isTouched = false
                                         isFlipped = false
+                                        currentIndex = -1
                                     }
                                 }
                             Text("Remembered")
@@ -94,9 +125,10 @@ struct FlashcardView: View {
                                 .onTapGesture {
                                     redButtonIsTouched = true
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2){
-                                        manager.remove()
+                                        manager.moveToBack()
                                         redButtonIsTouched = false
                                         isFlipped = false
+                                        currentIndex = -1
                                     }
                                 }
                             Text("Didn't")
@@ -114,6 +146,6 @@ struct FlashcardView: View {
 
 struct FlashcardView_Previews: PreviewProvider {
     static var previews: some View {
-        FlashcardView(deck: Deck.sampleDeck2)
+        FlashcardView(deck: .constant(Deck.sampleDeck2))
     }
 }

@@ -9,12 +9,13 @@ import Foundation
 
 struct Flashcard: Identifiable, Codable{
     let id: UUID
-    let front: String
-    let back: String
+    var front: String
+    var back: String
     let type: FlashcardType
     
     
-    
+    var prompt: String = ""
+    var listItems: [String] = []
     
     enum FlashcardType: Codable{
         case definition
@@ -26,6 +27,18 @@ struct Flashcard: Identifiable, Codable{
         self.front = front
         self.back = back
         self.type = type
+        
+        self.prompt = ""
+        self.listItems = []
+    }
+    init(id: UUID = UUID(), prompt: String, listItems: [String]){
+        self.id = id
+        self.prompt = prompt
+        self.listItems = listItems
+        
+        self.front = ""
+        self.back = ""
+        self.type = .list
     }
     
 }
@@ -132,13 +145,14 @@ extension Flashcard{
         Flashcard(front:"Rhodopsin", back:"Photopigment for rods"),
         Flashcard(front:"Cornea", back:"This part focuses eye"),
         Flashcard(front:"Iris", back:"Restricts amount of light entering eye"),
-        Flashcard(front:"Myopia", back:"Nearsightedness"),
+        Flashcard(front:"Myopia", back:"Nearsightedness, the eyeball is too long"),
         Flashcard(front:"_____ are the cells that capture photons of light, which have molecules called _____, which perform _____", back:"Photoreceptors, photopigments, phototransduction"),
         Flashcard(front:"Optic nerve is formed by ___ cells", back:"Ganglion cells form this"),
         Flashcard(front:"When you take a picture of your eyes, there is a dark spot in the ", back:"Fovea", type:.normal),
         Flashcard(front:"There are 4 million ____ and 100 million ___ in the eye", back:"There are _____ cones, and ____ rods in the eye"),
         Flashcard(front: "Straite cortex", back: "another word for primary visual cortex"),
         Flashcard(front: "Scotoma", back: "Medical term for blind spot"),
+        Flashcard(front: "Movement of the eye is controlled by", back: "Extraocular muscles control"),
         Flashcard(front: "Blindsight", back: "term for being unable to conciously perceive but can guess if stimulus is present"),
         Flashcard(front: "On center bipolar cells are ___ by glutamate", back: "__ center bipolar cells are inhibited by glutamate"),
         Flashcard(front: "____ can be effective for the LGN but ____ is more effective for V1", back: "Spots of light can be effective for ____ but prolonged stimuli is more effective for ___"),
@@ -151,11 +165,46 @@ extension Flashcard{
         Flashcard(front: "If you go from a bright area to dim room", back: "Photopigments in rods break down and can take 15 minutes to respond when"),
         Flashcard(front: "If you go from dim room to bright area", back: "All photopigments briefly break down and cones recover quickly when"),
         Flashcard(front: "Bipolar cells and photoreceptors send ", back: "____ and ____ send graded signals (not myelinated)"),
-        Flashcard(front: "At the optic chiasm, the axons from ___ cross over, while the axons from ___ stay on the same side", back: "At the optic chaism, the axons from the nasal retina ____, while the axons from the temportal retina ____"),
+        Flashcard(front: "At the optic chiasm, the axons from ___ cross over, while the axons from ___ stay on the same side", back: "At the optic chaism, the axons from the nasal retina ____, while the axons from the temporal retina ____"),
         Flashcard(front: "After the optic chiasm, the optic nerve becomes the ____", back: "Before the optic chiasm, the optic tract was the ____ "),
         Flashcard(front: "Optic radiations go to ", back: "Primary visual cortex receives signals from"),
-        Flashcard(front: "", back: ""),
+        Flashcard(front: "Ventral visual area", back: "This visual area helps identify objects, form vision"),
+        Flashcard(front: "Dorsal visual area", back: "This visual area helps spatial location"),
+        Flashcard(front: "Mishkin + Ungerlieder proposed", back: "2 visual processing systems : what and where were proposed by"),
+        Flashcard(front: "We have two types of bipolar cells bc", back: "To provide a higher dynamic range of processing", type: .normal),
+        Flashcard(front: "Bipolar cells prefer __ while ganglion cells prefer ___", back: "____ cells prefer either light or dark, whereas ____ cells prefer a donut (center-surround)"),
+        Flashcard(front: "Receptive fields for ____ are lines", back: "Receptive fields for simple cortical cells are ___"),
+        Flashcard(front: "Helmholtz", back: "Who proposed thichomatic hypothesis of color perception"),
+        Flashcard(front: "This color blindness misses M cone", back: "Deuteranope misses this cone"),
+        Flashcard(front: "This color blindness misses L cone", back: "Protanope misses this cone"),
+        Flashcard(front: "Ventral visual pathway", back: " (what)This pathway helps high res, form vision, helps identify"),
+        Flashcard(front: "Dorsal visual pathway", back: " (where) This pathway helps us guide our movements to things, see movement"),
+        Flashcard(front: "Optic ataxia", back: "Can't locate can identify, caused by damage to dorsal"),
+        Flashcard(front: "Ventral visual pathway passes through", back: "This pathway goes through occiptotemporal, inferior temporal area, inferior frontal"),
+        Flashcard(front: "Dorsal visual pathway passes through", back: "This pathwawy goes through parietal, middle temporal area"),
+        Flashcard(front: "This part responds to visual contours", back: "V2 can respond to"),
+        Flashcard(front: "This part responds to frequency gratings, but also to radial+concentric stimuli and color differences", back: "V4 area can respond to these 3 things"),
+        Flashcard(front: "This part responds to motion", back:"V5 responds to"),
+        Flashcard(front: "ambylopia definition and cause", back: "Misalignment of eye, caused by V1 suppressing info from one eye in first few years"),
+        Flashcard(front: "Ambylopia treatment", back: "Surgical correction, eye patches, visual exercises can treat"),
+        Flashcard(front: "Mascular degeneration", back: ""),
+        
     
     ]
+    static let chapter6: [Flashcard] = [
+        Flashcard(front: "Pure tone", back: "A sound with just one frequency"),
+        Flashcard(front: "Fundamental frequency", back: "The predominant frequency in a sound"),
+        Flashcard(front: "Harmonic", back: "Multiple of a frequency"),
+        Flashcard(front: "Timbre", back: "Difference in the harmonics of a sound"),
+        Flashcard(front: "Pinnae", back: "(the ear you see), funnels sound into ear canal"),
+        Flashcard(front: "We can hear from __ hz to _____ hz", back: "20hz - 20000hz", type:.normal),
+        Flashcard(front: "Fourier analysis", back: "takes complex wave form and breaks it down"),
+        Flashcard(front: "3 things in cochlea", back: "Vestibular canal, middle canal, tympanic canal"),
+        Flashcard(front: "Tiny hair on hair cell", back:"Stereocilia "),
+        Flashcard(prompt: "Auditory signal starting at Cochlea", listItems: ["Cochlear nucleus","Superior olivary nucleus", "Inferior colliculus", " Medial geniculate nucleus", "Auditory cortex"]),
+        
+    ]
+    static let singleListFlashcard = Flashcard(prompt: "What are the first 5 numbers?", listItems: ["Number 1", "Number 2", "Number 3", "Number 4", "Number 5"])
+    static let singleListFlashcardDeck = Deck(name: "literally just a single flashcard", flashcards: [singleListFlashcard])
 }
 
